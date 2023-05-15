@@ -4,17 +4,18 @@ const select = document.querySelector('#symbol');
 
 // gameboard object
 const gameBoard = (() => {
+
+   const board = Array(9).fill('');
     
     // update board array with symbol selections
    function updateBoard() { 
-        let board = Array(9).fill('');
-
-        for(let i = 0; i < board.length; i++) {
-            board[i] = cells[i].textContent;
+  
+        for(let i = 0; i < gameBoard.board.length; i++) {
+          gameBoard.board[i] = cells[i].textContent;
         }
-        return board
+        return gameBoard.board
     }
-    return {updateBoard};
+    return {board,updateBoard};
 })()
 
 // current player object
@@ -39,9 +40,10 @@ const player = (() => {
 // game flow object
 const game = (() => {
     function handleClick(e) {
-        // update UI gameboard
+        // update gameboard & UI
         const cell = e.target;
         cell.textContent  = player.currentPlayer;
+        gameBoard.updateBoard();
 
         if (game.checkForWin()) {
           message.textContent = player.currentPlayer + " wins!";
@@ -70,9 +72,9 @@ const game = (() => {
         for (let i = 0; i < winningIndexCombos.length; i++) {
         let [a, b, c] = winningIndexCombos[i];
         if (
-            gameBoard.updateBoard()[a] === player.currentPlayer &&
-            gameBoard.updateBoard()[b] === player.currentPlayer &&
-            gameBoard.updateBoard()[c] === player.currentPlayer
+            gameBoard.board[a] === player.currentPlayer &&
+            gameBoard.board[b] === player.currentPlayer &&
+            gameBoard.board[c] === player.currentPlayer
         ) {
             return true;
           }
@@ -91,7 +93,8 @@ const game = (() => {
         return isDraw;
     }
 
-    function resetGame() {
+    function resetGame() {  
+        gameBoard.board = Array(9).fill('');
         cells.forEach(cell => (cell.textContent = null));
 
         // on game reset set currentPlayer to symbol X
@@ -116,6 +119,6 @@ document.querySelector('#reset').addEventListener('click', game.resetGame);
 select.addEventListener('change', player.selectSymbol);
 
 cells.forEach(cell => cell.addEventListener('click', game.handleClick));
-cells.forEach(cell => cell.addEventListener('click', gameBoard.updateBoard));
+
 
 
