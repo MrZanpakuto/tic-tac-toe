@@ -84,8 +84,8 @@ const game = (() => {
 
     function checkForDraw() {
         let isDraw = true;
-        for (let i = 0; i < cells.length; i++) {
-          if (cells[i].textContent === "") {
+        for (let i = 0; i < gameBoard.board.length; i++) {
+          if (gameBoard.board[i] === "") {
             isDraw = false;
             break;
           }
