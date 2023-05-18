@@ -68,6 +68,19 @@ img {
     color: #fff;
  }
 
+ .x-symbol {
+    background-image: url(./img/cancel.png);
+    background-size: 75%;
+    background-position: center;
+    background-repeat: no-repeat;
+ }
+
+ .o-symbol {
+    background-image: url(./img/o.png);
+    background-size: 75%;
+    background-position: center;
+    background-repeat: no-repeat;
+ }
 
 
 
