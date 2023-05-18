@@ -2,6 +2,9 @@ const cells = document.querySelectorAll('.cell');
 const message = document.querySelector('#message');
 const select = document.querySelector('#symbol');
 
+// add data attribute symbol to each cell
+cells.forEach(cell => cell.dataset.symbol = '');
+
 // gameboard object
 const gameBoard = (() => {
 
@@ -11,7 +14,7 @@ const gameBoard = (() => {
    function updateBoard() { 
   
         for(let i = 0; i < gameBoard.board.length; i++) {
-          gameBoard.board[i] = cells[i].textContent;
+          gameBoard.board[i] = cells[i].dataset.symbol;
         }
         return gameBoard.board
     }
@@ -40,9 +43,19 @@ const player = (() => {
 // game flow object
 const game = (() => {
     function handleClick(e) {
-        // update gameboard & UI
+        // update gameboard UI
         const cell = e.target;
-        cell.textContent  = player.currentPlayer;
+
+        // add data attribute with current players symbol value to cell
+        cell.dataset.symbol = player.currentPlayer;
+
+        if(cell.dataset.symbol === 'X') {
+          cell.classList.add("x-symbol");
+        } else if (cell.dataset.symbol === 'O') {
+          cell.classList.add("o-symbol");
+        }
+
+        // update gameboard array
         gameBoard.updateBoard();
 
         if (game.checkForWin()) {
@@ -85,7 +98,7 @@ const game = (() => {
     function checkForDraw() {
         let isDraw = true;
         for (let i = 0; i < gameBoard.board.length; i++) {
-          if (gameBoard.board[i] === "") {
+          if (gameBoard.board[i] === '') {
             isDraw = false;
             break;
           }
@@ -95,12 +108,17 @@ const game = (() => {
 
     function resetGame() {  
         gameBoard.board = Array(9).fill('');
-        cells.forEach(cell => (cell.textContent = null));
+         
+        cells.forEach(cell => {
+          cell.dataset.symbol = '';
+          cell.classList.remove('x-symbol');
+          cell.classList.remove('o-symbol');
+        });
 
         // on game reset set currentPlayer to symbol X
         player.currentPlayer = 'X';
 
-        // return to default index value
+        // return to default index value of form control dropdown
         select.selectedIndex = 0;
 
         // enable drop down menu options
@@ -117,7 +135,6 @@ const game = (() => {
 
 document.querySelector('#reset').addEventListener('click', game.resetGame);
 select.addEventListener('change', player.selectSymbol);
-
 cells.forEach(cell => cell.addEventListener('click', game.handleClick));
 
 
