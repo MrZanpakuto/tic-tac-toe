@@ -64,7 +64,7 @@ const game = (() => {
             cell.removeEventListener("click", handleClick);
           });
         } else if (game.checkForDraw()) {
-          message.textContent = "It's a draw!";
+          message.textContent = "It's a Tie!";
         } else {
           player.currentPlayer = (player.currentPlayer === "X" ? "O" : "X");
           message.textContent = "It's " + player.currentPlayer + "'s turn";
