@@ -29,7 +29,7 @@ const player = (() => {
     // select symbol for player
     function selectSymbol(e) {
         player.currentPlayer = e.target.value;
-        message.textContent = "It's " + player.currentPlayer + "'s turn";
+        message.textContent = "It's Player" + player.currentPlayer + "'s turn";
 
         // disable drop down options after first selection
         const options = document.querySelectorAll('option');
@@ -59,7 +59,7 @@ const game = (() => {
         gameBoard.updateBoard();
 
         if (game.checkForWin()) {
-          message.textContent = player.currentPlayer + " wins!";
+          message.textContent = "Player " + player.currentPlayer + " wins!";
           cells.forEach(cell => {
             cell.removeEventListener("click", handleClick);
           });
@@ -67,7 +67,7 @@ const game = (() => {
           message.textContent = "It's a Tie!";
         } else {
           player.currentPlayer = (player.currentPlayer === "X" ? "O" : "X");
-          message.textContent = "It's " + player.currentPlayer + "'s turn";
+          message.textContent = "It's Player " + player.currentPlayer + "'s turn";
         }
     }
 
