@@ -23,13 +23,13 @@ const gameBoard = (() => {
 
 // current player object
 const player = (() => { 
-    // on page load current player is X
-    const currentPlayer = 'X';
+  
+    const currentPlayer = 'Ichigo';
 
     // select symbol for player
     function selectSymbol(e) {
         player.currentPlayer = e.target.value;
-        message.textContent = "It's Player " + player.currentPlayer + "'s turn";
+        message.textContent = "It's " + player.currentPlayer + "'s turn";
 
         // disable drop down options after first selection
         const options = document.querySelectorAll('option');
@@ -38,7 +38,7 @@ const player = (() => {
     }
 
     function changePlayer() {
-      player.currentPlayer = (player.currentPlayer === "X" ? "O" : "X");
+      player.currentPlayer = (player.currentPlayer === 'Ichigo' ? 'Byakuya' : 'Ichigo');
     }
     
     return {currentPlayer, selectSymbol, changePlayer};
@@ -59,7 +59,7 @@ const game = (() => {
         gameBoard.updateBoard();
 
         if (game.checkForWin()) {
-          message.textContent = "Player " + player.currentPlayer + " wins!";
+          message.textContent = player.currentPlayer + " wins!";
           cells.forEach(cell => {
             cell.removeEventListener("click", handleClick);
           });
@@ -126,7 +126,7 @@ const game = (() => {
       }
 
       if (game.checkForWin()) {
-        message.textContent = "Computer Wins!";
+        message.textContent = player.currentPlayer + " Wins!";
         cells.forEach(cell => {
           cell.removeEventListener("click", handleClick);
         });
@@ -134,14 +134,14 @@ const game = (() => {
         message.textContent = "It's a Tie!";
       } else {
         player.changePlayer();
-        message.textContent = "It's Player " + player.currentPlayer + "'s turn";
+        message.textContent = "It's " + player.currentPlayer + "'s turn";
       }
     }
 
     function addSymbol(cell) {
-      if(cell.dataset.symbol === 'X') {
+      if(cell.dataset.symbol === 'Ichigo') {
          cell.classList.add("x-symbol");
-      } else if (cell.dataset.symbol === 'O') {
+      } else if (cell.dataset.symbol === 'Byakuya') {
         cell.classList.add("o-symbol");
       }
     }
@@ -156,7 +156,7 @@ const game = (() => {
         });
 
         // on game reset set currentPlayer to symbol X
-        player.currentPlayer = 'X';
+        player.currentPlayer = 'Ichigo';
 
         // return to default index value of form control dropdown
         select.selectedIndex = 0;
