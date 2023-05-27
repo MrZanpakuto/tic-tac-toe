@@ -51,8 +51,11 @@ const game = (() => {
         const cell = e.target;
 
         // add data attribute with current players symbol value to cell
+        if(cell.dataset.symbol != '') {
+          return;
+        }
         cell.dataset.symbol = player.currentPlayer;
-
+        
         // display symbol on UI board
         game.addSymbol(cell);
 
@@ -127,6 +130,8 @@ const game = (() => {
 
       if (game.checkForWin()) {
         message.textContent = player.currentPlayer + " Wins!";
+        
+
         cells.forEach(cell => {
           cell.removeEventListener("click", handleClick);
         });
