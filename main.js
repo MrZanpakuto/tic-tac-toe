@@ -55,7 +55,7 @@ const game = (() => {
           return;
         }
         cell.dataset.symbol = player.currentPlayer;
-        
+
         // display symbol on UI board
         game.addSymbol(cell);
 
@@ -116,7 +116,7 @@ const game = (() => {
   
         const randomIndex = Math.floor(Math.random()* gameBoard.board.length);
 
-        if(gameBoard.board[randomIndex] === '') {
+        if(gameBoard.board[randomIndex] == '') {
           // update board
            gameBoard.board[randomIndex] = player.currentPlayer;
 
