@@ -334,6 +334,9 @@ document.querySelector('#reset').addEventListener('click', gameBoard.resetGame);
 select.addEventListener('change', player.selectSymbol);
 cells.forEach(cell => cell.addEventListener('click', game.handleClick));
 
-
+document.addEventListener('DOMContentLoaded', () => {
+  const year = new Date().getFullYear();
+  document.getElementById('copyright-year').textContent = year;
+});
 
 
