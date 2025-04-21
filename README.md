@@ -37,7 +37,7 @@ Welcome to the **Zanpakutō** game! Challenge yourself to this classic game of s
 
 ## 🎯 Goal
 
-Align 3 of your symbols in a row before your opponent does. Can you outsmart the Ichigo? 🏆
+Align 3 of your symbols in a row before your opponent does. Can you outsmart Ichigo? 🏆
 
 ---
 
